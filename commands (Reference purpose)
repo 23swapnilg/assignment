@@ -1,0 +1,41 @@
+1. Docker Commands 
+  for installing the docker on machine  
+  sudo yum install docker -y  
+    
+  for starting the docker service  
+  sudo systemctl start docker
+
+  for enabling the docker service (Not necessary its only for the os configuration )
+  sudo systemctl enable docker
+
+2. Terraform Commands
+   for installing the yum-utils package
+   sudo yum install -y yum-utils    
+
+   for official HashiCorp repository (helps to install the latest Terraform version)
+   sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+
+   for installing the docker on machine  
+   sudo yum -y install terraform
+
+3. Installing awscli   (for the latest version of awscli v2 )
+   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+   unzip awscliv2.zip
+   sudo ./aws/install
+
+4. Configure AWS CLI
+   aws configure   ( Entering the access key, secret key and region after the installing the AWS CLI )
+
+5. Creating the ECR Repository
+   used for creating the ECR Repository
+   aws ecr create-repository --repository-name fargate-app 
+
+6. Authenticate Docker with ECR
+   aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 970547365086.dkr.ecr.ap-south-1.amazonaws.com
+  
+7. Build & Push Image
+  docker build -t fargate-app
+  docker tag fargate-app:latest 970547365086.dkr.ecr.ap-south-1.amazonaws.com/fargate-app:latest
+  docker push 970547365086.dkr.ecr.ap-south-1.amazonaws.com/fargate-app:latest
+
+  
